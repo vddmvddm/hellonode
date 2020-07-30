@@ -13,7 +13,7 @@ pipeline {
     }
     stage ('Run') {
       steps {
-        sh 'node app.js'
+        sh 'pm2 start app.js'
       }
     }
   }
