@@ -13,7 +13,7 @@ pipeline {
     }
     stage ('Run') {
       steps {
-        sh './script.sh'
+        sh 'node app.js'
       }
     }
   }
