@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage ('Clone repository') {
       steps {
-        sh 'cd /home/ansible/'
+        sh 'sudo cd /home/ansible/'
         sh 'ansible-playbook -i inventory hello_git_clone.yml --tags clone'
       }
     }
