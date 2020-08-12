@@ -4,22 +4,25 @@ pipeline {
   stages {
     stage ('Clone repository') {
       steps {
-        sh 'cd /var/lib/jenkins/ansible/'
-        sh 'ansible-playbook -i inventory hello_git_clone.yml'
+        sh 'cd /home/ansible/'
+        sh 'ansible-playbook -i inventory hello_git_clone.yml --tags clone'
     }
     stage ('Install dependencies') {
       steps {
-        sh 'npm install'
+        sh 'cd /home/ansible/'
+        sh 'ansible-playbook -i inventory hello_git_clone.yml --tags dependencies'
       }
     }
     stage ('Test') {
       steps {
-        sh 'npm test'
+        sh 'cd /home/ansible/'
+        sh 'ansible-playbook -i inventory hello_git_clone.yml --tags test'
       }
     }
     stage ('Run') {
       steps {
-        sh 'node app.js'
+        sh 'cd /home/ansible/'
+        sh 'ansible-playbook -i inventory hello_git_clone.yml --tags run'
       }
     }
   }
