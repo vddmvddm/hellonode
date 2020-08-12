@@ -1,0 +1,26 @@
+---
+- hosts: nodes
+  become: yes
+  vars:
+    folder: /opt/hello
+  tasks:
+    - name: clone repo
+      git:
+        repo: https://github.com/vddmvddm/hellonode.git
+        dest: "{{ folder }}"
+      tags:
+      - clone
+    - name: install dependencies
+      command: 'npm install {{ folder }}'
+      tags:
+        - dependencies
+    - name: Test build
+      command: chdir={{ folder }} npm test
+      tags:
+        - test
+    - name: Install pm2
+      command: 'npm install pm2@latest -g'
+    - name: Run App
+      command: chdir={{ folder }} pm2 restart app.js
+      tags:
+        - run
