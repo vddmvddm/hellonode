@@ -6,6 +6,7 @@ pipeline {
       steps {
         sh 'cd /home/ansible/'
         sh 'ansible-playbook -i inventory hello_git_clone.yml --tags clone'
+      }
     }
     stage ('Install dependencies') {
       steps {
